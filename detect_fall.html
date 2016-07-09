@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="template">
-    <p>Baseline HTML boilerplate.</p>
+    <p>Fall: <span id="changethis"></span></p>
   </div>
 
  <ul>
@@ -37,6 +37,14 @@ if (window.DeviceMotionEvent != undefined) {
 		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
 		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
 
+		if (e.accelerationIncludingGravity.y >= -12) {
+			document.getElementById("changethis").innerHTML = "";
+		}
+		else {
+			document.getElementById("changethis").innerHTML = "YES";
+			alert("I FELL!");
+		}
+
 		if ( e.rotationRate ) {
 			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
 			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
@@ -58,19 +66,8 @@ if (window.DeviceMotionEvent != undefined) {
 		y = parseInt(y + vy / 50);
 		x = parseInt(x + vx / 50);
 		
-		boundingBoxCheck();
-		
 	}, 25);
 } 
-
-
-function boundingBoxCheck(){
-	if (x<0) { x = 0; vx = -vx; }
-	if (y<0) { y = 0; vy = -vy; }
-	if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
-	if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }
-	
-}
 
 </script>
 
